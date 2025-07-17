@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>รวมใบงานที่ 8 - 14 | นาย นพเก้า มณีฉาย คม.68/1</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+    body {
+      font-family: 'Prompt', sans-serif;
+      background: #f0f4f8;
+      margin: 20px 40px;
+      color: #333;
+      line-height: 1.6;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      letter-spacing: 1px;
+    }
+    .author {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #555;
+      font-weight: 600;
+    }
+
+    /* ปุ่มเมนู */
+    .tab-buttons {
+      text-align: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .tab-buttons button {
+      background-color: #2a9d8f;
+      border: none;
+      color: white;
+      padding: 10px 18px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .tab-buttons button:hover {
+      background-color: #21867a;
+    }
+    .tab-buttons button.active {
+      background-color: #1b6652;
+    }
+
+    /* ซ่อนเนื้อหาที่ไม่ได้เลือก */
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    /* ตารางทั่วไป */
+    table {
+      width: 90%;
+      margin: 20px auto 50px auto;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    caption {
+      caption-side: top;
+      font-weight: 700;
+      font-size: 1.3em;
+      padding: 12px 0;
+      background: #2a9d8f;
+      color: white;
+      letter-spacing: 0.8px;
+      user-select: none;
+    }
+    th, td {
+      padding: 14px 18px;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    /* ใบงาน 8 - Style Table Borders */
+    .style-border th, .style-border td {
+      border: 2px solid #000;
+    }
+    .round-border {
+      border: 2px solid #2a9d8f;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .round-border th, .round-border td {
+      border: 1px solid #2a9d8f;
+    }
+    .dotted-border th, .dotted-border td {
+      border: 2px dotted #e76f51;
+    }
+    .color-border th {
+      border: 2px solid #264653;
+      background-color: #264653;
+      color: white;
+    }
+    .color-border td {
+      border: 2px solid #2a9d8f;
+    }
+
+    /* ใบงาน 9 - Table Sizes */
+    .size-table {
+      width: 700px;
+      table-layout: fixed;
+    }
+    .size-table th, .size-table td {
+      border: 1px solid #777;
+      overflow-wrap: break-word;
+    }
+    .col-small {
+      width: 120px;
+    }
+    .col-medium {
+      width: 250px;
+    }
+    .row-height {
+      height: 45px;
+    }
+
+    /* ใบงาน 10 - Table Headers */
+    .vertical-header th {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      padding: 10px 8px;
+      width: 40px;
+    }
+    .align-header th {
+      text-align: left;
+      padding-left: 20px;
+    }
+    .colspan-header th {
+      background-color: #264653;
+      color: white;
+      border: 1px solid #2a9d8f;
+    }
+
+    /* ใบงาน 11 - Cell Padding & Spacing */
+    .padding-table th, .padding-table td {
+      padding: 25px 30px;
+      border: 1px solid #aaa;
+    }
+    .spacing-table {
+      border-collapse: separate;
+      border-spacing: 12px 10px;
+      border: 1px solid #bbb;
+    }
+    .spacing-table th, .spacing-table td {
+      border: 1px solid #999;
+      padding: 10px 15px;
+      background: #fff;
+    }
+
+    /* ใบงาน 12 - Colspan & Rowspan */
+    .colspan-rowspan {
+      width: 60%;
+    }
+    .colspan-rowspan th, .colspan-rowspan td {
+      border: 1px solid #666;
+    }
+    .colspan-rowspan th {
+      background-color: #2a9d8f;
+      color: white;
+    }
+    .colspan-rowspan .highlight {
+      background-color: #a7c7e7;
+      font-weight: 600;
+    }
+
+    /* ใบงาน 13 - Table Styling */
+    .horizontal-zebra tr:nth-child(even) {
+      background-color: #eaf2f8;
+    }
+    .vertical-zebra td:nth-child(even) {
+      background-color: #fdebd0;
+    }
+    .combined-zebra tr:nth-child(even) td:nth-child(even) {
+      background-color: #d5f5e3;
+    }
+    .horizontal-divider tr {
+      border-bottom: 2px solid #95a5a6;
+    }
+    .hoverable-table tr:hover {
+      background-color: #f9e79f;
+      cursor: pointer;
+    }
+
+    /* ใบงาน 14 - Colgroup */
+    colgroup col:nth-child(1) {
+      background-color: #ffe0e0;
+    }
+    colgroup col:nth-child(2) {
+      background-color: #e0ffe0;
+    }
+    colgroup col:nth-child(3) {
+      background-color: #e0e0ff;
+    }
+    table.colgroup-table {
+      width: 60%;
+      border: 1px solid #444;
+      margin-bottom: 60px;
+    }
+    table.colgroup-table th, table.colgroup-table td {
+      border: 1px solid #444;
+      padding: 12px 15px;
+      font-weight: 500;
+    }
+    table.colgroup-table th {
+      background-color: #264653;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>รวมใบงานที่ 8 - 14</h1>
+  <div class="author">นาย นพเก้า มณีฉาย คม.68/1</div>
+
+  <div class="tab-buttons">
+    <button class="active" data-tab="work8">ใบงานที่ 8</button>
+    <button data-tab="work9">ใบงานที่ 9</button>
+    <button data-tab="work10">ใบงานที่ 10</button>
+    <button data-tab="work11">ใบงานที่ 11</button>
+    <button data-tab="work12">ใบงานที่ 12</button>
+    <button data-tab="work13">ใบงานที่ 13</button>
+    <button data-tab="work14">ใบงานที่ 14</button>
+  </div>
+
+  <!-- ใบงานที่ 8 -->
+  <section id="work8" class="tab-content active">
+    <h2>ใบงานที่ 8 - Style Table Borders</h2>
+
+    <table class="style-border">
+      <caption>Style Table Borders</caption>
+      <tr><th>ประเทศ</th><th>เมืองหลวง</th></tr>
+      <tr><td>ไทย</td><td>กรุงเทพฯ</td></tr>
+      <tr><td>A</td><td>เวียงจันทน์</td></tr>
+    </table>
+
+    <table class="round-border">
+      <caption>Round Table Borders</caption>
+      <tr><th>ผลไม้</th><th>สี</th></tr>
+      <tr><td>แอปเปิ้ล</td><td>แดง</td></tr>
+      <tr><td>B</td><td>เหลือง</td></tr>
+    </table>
+
+    <table class="dotted-border">
+      <caption>Dotted Table Borders</caption>
+      <tr><th>วิชา</th><th>คะแนน</th></tr>
+      <tr><td>คณิตศาสตร์</td><td>90</td></tr>
+      <tr><td>วิทยาศาสตร์</td><td>85</td></tr>
+    </table>
+
+    <table class="color-border">
+      <caption>Border Color</caption>
+      <tr><th>ชื่อ</th><th>อายุ</th></tr>
+      <tr><td>นพเก้า</td><td>17</td></tr>
+      <tr><td>C</td><td>18</td></tr>
+    </table>
+  </section>
+
+  <!-- ใบงานที่ 9 -->
+  <section id="work9" class="tab-content">
+    <h2>ใบงานที่ 9 - Table Sizes</h2>
+    <table class="size-table">
+      <caption>กำหนดขนาดตาราง และความกว้างคอลัมน์</caption>
+      <tr>
+        <th class="col-small">รหัสสินค้า</th>
+        <th class="col-medium">ชื่อสินค้า</th>
+        <th>ราคา (บาท)</th>
+      </tr>
+      <tr class="row-height">
+        <td>001</td>
+        <td>โน้ตบุ๊ก</td>
+        <td>25,000</td>
+      </tr>
+      <tr class="row-height">
+        <td>002</td>
+        <td>แท็บเล็ต</td>
+        <td>12,000</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- ใบงานที่ 10 -->
+  <section id="work10" class="tab-content">
+    <h2>ใบงานที่ 10 - Table Headers</h2>
+    <table class="colspan-header" style="width: 80%; margin: auto;">
+      <caption>หัวตารางแบบรวมคอลัมน์ (Colspan)</caption>
+      <tr><th colspan="3">ข้อมูลนักเรียน</th></tr>
+      <tr>
+        <th>ชื่อ</th><th>ชั้น</th><th>คะแนน</th>
+      </tr>
+      <tr><td>นพเก้า</td><td>คม.68/1</td><td>95</td></tr>
+      <tr><td>A</td><td>คม.68/1</td><td>88</td></tr>
+    </table>
+
+    <table class="vertical-header" style="width: 60%; margin: 30px auto;">
+      <caption>หัวตารางแนวตั้ง (Vertical Headers)</caption>
+      <tr>
+        <th>วิชา</th>
+        <th>คะแนน</th>
+      </tr>
+      <tr>
+        <td>คณิตศาสตร์</td>
+        <td>90</td>
+      </tr>
+      <tr>
+        <td>วิทยาศาสตร์</td>
+        <td>85</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- ใบงานที่ 11 -->
+  <section id="work11" class="tab-content">
+    <h2>ใบงานที่ 11 - Table Cell Padding & Spacing</h2>
+    <table class="padding-table">
+      <caption>ตาราง Cell Padding (ช่องว่างในเซลล์)</caption>
+      <tr><th>สินค้า</th><th>ราคา</th></tr>
+      <tr><td>มือถือ</td><td>8,500</td></tr>
+      <tr><td>หูฟัง</td><td>1,200</td></tr>
+    </table>
+
+    <table class="spacing-table">
+      <caption>ตาราง Cell Spacing (ช่องว่างระหว่างเซลล์)</caption>
+      <tr><th>สินค้า</th><th>ราคา</th></tr>
+      <tr><td>โน้ตบุ๊ก</td><td>24,500</td></tr>
+      <tr><td>แท็บเล็ต</td><td>11,500</td></tr>
+    </table>
+  </section>
+
+  <!-- ใบงานที่ 12 -->
+  <section id="work12" class="tab-content">
+    <h2>ใบงานที่ 12 - Table Colspan & Rowspan</h2>
+    <table class="colspan-rowspan">
+      <caption>Colspan และ Rowspan</caption>
+      <tr>
+        <th>ชื่อ</th>
+        <th colspan="2">รายละเอียด</th>
+      </tr>
+      <tr>
+        <td>นพเก้า</td>
+        <td class="highlight">อายุ</td>
+        <td>17</td>
+      </tr>
+      <tr>
+        <td>ภูผา</td>
+        <td class="highlight">ชั้น</td>
+        <td>คม.68/1</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- ใบงานที่ 13 -->
+  <section id="work13" class="tab-content">
+    <h2>ใบงานที่ 13 - Table Styling (Zebra Stripes, Divider, Hover)</h2>
+    <table class="horizontal-zebra">
+      <caption>Horizontal Zebra Stripes</caption>
+      <tr><th>ชื่อ</th><th>คะแนน</th></tr>
+      <tr><td>นพเก้า</td><td>90</td></tr>
+      <tr><td>A</td><td>88</td></tr>
+      <tr><td>B</td><td>76</td></tr>
+    </table>
+
+    <table class="vertical-zebra">
+      <caption>Vertical Zebra Stripes</caption>
+      <tr><th>ชื่อ</th><th>คะแนน</th></tr>
+      <tr><td>นพเก้า</td><td>90</td></tr>
+      <tr><td>A</td><td>88</td></tr>
+      <tr><td>B</td><td>76</td></tr>
+    </table>
+
+    <table class="combined-zebra">
+      <caption>Combine Vertical & Horizontal Stripes</caption>
+      <tr><th>ชื่อ</th><th>คะแนน</th><th>เกรด</th></tr>
+      <tr><td>นพเก้า</td><td>90</td><td>A</td></tr>
+      <tr><td>A</td><td>88</td><td>A</td></tr>
+      <tr><td>B</td><td>76</td><td>B+</td></tr>
+    </table>
+
+    <table class="horizontal-divider">
+      <caption>Horizontal Divider</caption>
+      <tr><th>สินค้า</th><th>ราคา</th></tr>
+      <tr><td>โน้ตบุ๊ก</td><td>25,000</td></tr>
+      <tr><td>แท็บเล็ต</td><td>12,000</td></tr>
+      <tr><td>หูฟัง</td><td>1,500</td></tr>
+    </table>
+
+    <table class="hoverable-table">
+      <caption>Hoverable Table</caption>
+      <tr><th>วิชา</th><th>หน่วยกิต</th></tr>
+      <tr><td>ภาษาอังกฤษ</td><td>3</td></tr>
+      <tr><td>คอมพิวเตอร์</td><td>3</td></tr>
+      <tr><td>คณิตศาสตร์</td><td>4</td></tr>
+    </table>
+  </section>
+
+  <!-- ใบงานที่ 14 -->
+  <section id="work14" class="tab-content">
+    <h2>ใบงานที่ 14 - Table Colgroup และ Multiple Col Elements</h2>
+    <table class="colgroup-table">
+      <caption>ใช้ &lt;colgroup&gt; กำหนดสีพื้นหลังคอลัมน์</caption>
+      <colgroup>
+        <col span="1" />
+        <col span="1" />
+        <col span="1" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>ชื่อ</th>
+          <th>ชั้นปี</th>
+          <th>คะแนนรวม</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>นพเก้า มณีฉาย</td>
+          <td>คม.68/1</td>
+          <td>95</td>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td>คม.68/1</td>
+          <td>88</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>คม.68/2</td>
+          <td>91</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+<script>
+  // เลือก tab และแสดงเนื้อหา
+  const buttons = document.querySelectorAll('.tab-buttons button');
+  const tabs = document.querySelectorAll('.tab-content');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      tabs.forEach(tab => tab.classList.remove('active'));
+      btn.classList.add('active');
+      const tabId = btn.getAttribute('data-tab');
+      document.getElementById(tabId).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
